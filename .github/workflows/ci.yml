@@ -1,0 +1,19 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  repository-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check documentation baseline
+        shell: bash
+        run: |
+          test -f README.md
+          test -f PROJECT_SPEC.md
+          test -f docs/api.md
+          test -f config/.env.example
