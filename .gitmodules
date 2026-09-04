@@ -1,0 +1,6 @@
+[submodule "vendor/rsshub"]
+	path = vendor/rsshub
+	url = https://github.com/DIYgod/RSSHub.git
+[submodule "vendor/miniflux"]
+	path = vendor/miniflux
+	url = https://github.com/miniflux/v2.git

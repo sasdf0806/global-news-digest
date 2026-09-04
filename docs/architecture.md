@@ -12,6 +12,9 @@ services/api
 services/worker
   采集、清洗、翻译、去重、聚类、排序、摘要、日报生成
 
+infra/docker-compose.yml
+  PostgreSQL、Redis、Keycloak、Flower、可选 RSSHub 和观测组件
+
 database
   PostgreSQL 保存业务数据和任务状态
 
@@ -25,7 +28,7 @@ future/channels
 collect → normalize → deduplicate → cluster → rank → summarize → publish
 ```
 
-每一步都应有明确输入、输出和状态，失败可从最近一个成功步骤继续执行。
+每一步都应有明确输入、输出和状态，失败可从最近一个成功步骤继续执行。V1 使用 Celery + Redis，任务由数据库 `job_runs.run_key` 保证幂等；复杂长流程保留迁移到 Temporal 的边界。
 
 ## 3. 推荐目录
 
@@ -38,7 +41,7 @@ tests/
 infra/
 ```
 
-`packages/shared` 保存前后端共享的数据结构、枚举和 API 类型定义。
+`packages/shared` 保存跨服务纯函数和契约；TypeScript API 类型优先从 FastAPI OpenAPI 自动生成，避免手工重复定义。
 
 ## 4. 组件职责
 

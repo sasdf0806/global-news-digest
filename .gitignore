@@ -1,6 +1,7 @@
 # Environment and secrets
 .env
 .env.*
+*.tsbuildinfo
 !.env.example
 *.pem
 *.key
@@ -9,6 +10,7 @@
 __pycache__/
 *.py[cod]
 .venv/
+.venv-local/
 .pytest_cache/
 .ruff_cache/
 
