@@ -1,0 +1,11 @@
+alembic==1.19.1
+datasketch==2.0.0
+fastapi==0.141.1
+httpx==0.28.1
+pydantic-settings==2.15.0
+psycopg[binary]==3.3.5
+python-multipart==0.0.32
+pytest==8.4.2
+pytest-asyncio==1.1.0
+SQLAlchemy==2.0.52
+uvicorn[standard]==0.52.4

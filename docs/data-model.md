@@ -18,15 +18,16 @@ content_hash, status, created_at
 ## events 聚合事件
 
 ```text
-id, title, summary, analysis, category, region,
-importance_score, first_seen_at, last_updated_at, status,
+id, title, fact_summary, impact_analysis, key_facts_json,
+uncertainties_json, category, region, importance_score,
+first_seen_at, last_updated_at, status, prompt_version,
 created_at, updated_at
 ```
 
 ## event_news 事件与新闻关联
 
 ```text
-event_id, news_item_id, similarity_score, created_at
+id, event_id, news_item_id, similarity_score, created_at
 ```
 
 ## daily_reports 每日日报
@@ -36,10 +37,10 @@ id, report_date, title, content_json, content_markdown,
 status, generated_at, published_at, version, created_at
 ```
 
-## users 用户
+## users 用户（身份由 Keycloak 管理）
 
 ```text
-id, email, password_hash, role, status, created_at, updated_at
+id, keycloak_subject, email, role, status, created_at, updated_at
 ```
 
 ## user_preferences 用户偏好
@@ -47,6 +48,12 @@ id, email, password_hash, role, status, created_at, updated_at
 ```text
 user_id, topics_json, regions_json, language,
 display_count, show_analysis, updated_at
+```
+
+## bookmarks 用户收藏
+
+```text
+id, user_id, event_id, created_at
 ```
 
 ## job_runs 任务执行记录

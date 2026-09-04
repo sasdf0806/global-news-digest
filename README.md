@@ -2,7 +2,7 @@
 
 全球热点新闻智能简报 Web 系统。
 
-> 当前状态：开发准备（V1.0）。业务代码尚未开始实现。
+> 当前状态：V1 基础骨架已建立，业务流水线正在实现中。
 
 ## 项目定位
 
@@ -20,6 +20,9 @@
 - [环境变量模板](./config/.env.example)
 - [GitHub 操作与 Token 配置](./docs/github.md)
 - [开发协作规范](./AGENTS.md)
+- [本地开发](./docs/development.md)
+- [开源组件与维护边界](./docs/open-source-stack.md)
+- [第三方组件声明](./docs/third-party-notices.md)
 
 ## 推荐技术栈
 
@@ -27,7 +30,7 @@
 - 后端：FastAPI + Python
 - 数据库：PostgreSQL
 - 任务处理：Python Worker
-- 缓存/队列：Redis（V1.1 引入）
+- 缓存/队列：Redis + Celery
 - 部署：Docker
 
 ## 目录约定
@@ -37,10 +40,11 @@ global-news-digest/
 ├─ docs/              设计和接口文档
 ├─ config/            环境变量和配置模板
 ├─ scripts/           运维和本地辅助脚本
-├─ apps/web/          前端应用（待创建）
-├─ services/api/      后端 API（待创建）
-├─ services/worker/   采集、处理和日报任务（待创建）
-├─ tests/             测试代码（待创建）
+├─ apps/web/          Next.js 前端
+├─ services/api/      FastAPI 后端与 Alembic 迁移
+├─ services/worker/   Celery 采集、处理和日报任务
+├─ infra/             Docker Compose、数据库和观测配置
+├─ tests/             测试代码
 └─ PROJECT_SPEC.md    项目总规范
 ```
 
@@ -56,9 +60,12 @@ global-news-digest/
 
 ```bash
 cp config/.env.example .env
+docker compose -f infra/docker-compose.yml up -d --build
 ```
 
-按需填写本地开发配置；`.env` 不应提交到 Git。当前仓库已包含 GitHub Actions 基线检查，后续添加前端、API 和 Worker 实现后，应在对应目录补充格式化、类型检查和测试步骤。
+按需填写本地开发配置；`.env` 不应提交到 Git。Docker 启动方式、服务端口和可选 profile 见 [本地开发](./docs/development.md)。
+
+仓库中的 `vendor/rsshub` 和 `vendor/miniflux` 为可选完整应用子模块；其余框架和库通过锁定的 Python/Node 依赖管理。
 
 ## GitHub 协作
 

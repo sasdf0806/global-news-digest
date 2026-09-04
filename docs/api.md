@@ -2,6 +2,16 @@
 
 基础路径：`/api`
 
+## 当前已实现
+
+```text
+GET /health
+GET /events?category=&region=&keyword=&limit=&offset=
+```
+
+服务会在响应头返回 `X-Request-ID`；业务响应使用 `success/data/error/request_id` 结构。
+事件列表只返回 `published` 状态，按重要性降序、更新时间降序排列；`keyword` 会同时匹配标题和事实摘要。
+
 ## 公共接口
 
 ```text
